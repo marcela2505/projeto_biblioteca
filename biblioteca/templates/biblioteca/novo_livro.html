@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Novo Livro</title>
+    <link rel="stylesheet" href="{% static 'biblioteca/style.css' %}">
+</head>
+<body>
+{% if messages %}
+  <ul class=\"messages\">
+    {% for message in messages %}
+      <li class=\"{{ message.tags }}\">{{ message }}</li>
+    {% endfor %}
+  </ul>
+{% endif %}
+
+    <header>
+        <h1>Adicionar Novo Livro</h1>
+    </header>
+    <div class="container">
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Salvar</button>
+        </form>
+        <a href="{% url 'lista_livros' %}">Voltar à lista</a>
+    </div>
+</body>
+</html>

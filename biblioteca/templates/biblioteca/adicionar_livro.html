@@ -1,0 +1,64 @@
+{% extends "biblioteca/base.html" %}
+
+{% block content %}
+  <style>
+    .btn {
+      background-color: #2c3e50;  
+      color: #fff;
+      border: none;
+      padding: 12px 0;
+      width: 100%;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+     
+  }
+
+  .btn:hover {
+    background-color: #1f2a38;  
+     
+  }
+
+  .book-form {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15); /* sombra suave */
+    padding: 30px 40px;
+    max-width: 500
+  }
+
+  body{
+    background-color: #cccccc33;
+  }
+
+  </style>
+
+  <h1>Adicionar Livro</h1>
+  <form method="post" class="book-form">
+    {% csrf_token %}
+    <div class="form-row">
+      {{ form.titulo.label_tag }}<br>
+      {{ form.titulo }}
+    </div>
+    <div class="form-row">
+      {{ form.autor.label_tag }}<br>
+      {{ form.autor }}
+    </div>
+    <div class="form-row">
+      {{ form.ano_publicacao.label_tag }}<br>
+      {{ form.ano_publicacao }}
+    </div>
+    <div class="form-row">
+      {{ form.genero.label_tag }}<br>
+      {{ form.genero }}
+    </div>
+    <div class="form-row checkbox-row">
+      {{ form.disponivel }} {{ form.disponivel.label_tag }}
+    </div>
+    <div class="form-row">
+      <button type="submit" class="btn">Salvar</button>
+    </div>
+  </form>
+
+{% endblock %}

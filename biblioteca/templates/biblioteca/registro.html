@@ -1,0 +1,173 @@
+{% extends "biblioteca/base.html" %}
+
+
+{% block content %}
+ <style>
+  body {
+    background: linear-gradient(to bottom right, #f5f7fa, #e8ecf3);
+  }
+
+  .form-container {
+    background-color: white;
+    padding: 40px;
+    margin: 60px auto;
+    width: 420px;
+    border-radius: 16px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+
+  .form-container h1 {
+    color: #2c3e50;
+    font-size: 1.8em;
+    margin-bottom: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+  }
+
+.form-container form {
+  text-align: left;
+}
+
+.form-container .btn {
+  width: 100%;
+  background-color: #2c3e50;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.form-container .btn:hover {
+  background-color: #1f2a38 ;
+}
+
+.form-group {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 600;
+  color: #26264e;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+
+.form-group input:focus {
+  border-color: #4b3b9a;
+  outline: none;
+  box-shadow: 0 0 4px rgba(75, 59, 154, 0.3);
+}
+
+.form-container  a {
+  color: #4b5e70;
+  text-decoration: none;
+  }
+.form-container  a:hover {
+  text-decoration: underline;
+}
+
+#password-requirements p {
+  font-size: 14px;
+  margin: 2px 0;
+}
+
+.invalid {
+  color: red;
+}
+
+.valid {
+  color: green;
+}
+
+
+
+
+
+</style>
+
+<div class="form-container">
+  <h1>Registrar nova conta</h1>
+
+  <form method="post">
+    {% csrf_token %}
+
+    <div class="form-group">
+      <label for="{{ form.username.id_for_label }}">Username:</label>
+      {{ form.username }}
+      {% if form.username.errors %}
+        <div class="error">{{ form.username.errors }}</div>
+      {% endif %}
+    </div>
+
+    <div class="form-group">
+      <label for="{{ form.password1.id_for_label }}">Password:</label>
+      {{ form.password1 }}
+      <div id="password-requirements">
+       <p id="length" class="invalid">Mínimo 8 caracteres</p>
+       <p id="uppercase" class="invalid">Ao menos uma letra maiúscula</p>
+       <p id="number" class="invalid">Ao menos um número</p>
+       <p id="special" class="invalid">Ao menos um caractere especial (!@#$%^&*)</p>
+      </div>
+      {% if form.password1.errors %}
+        <div class="error">{{ form.password1.errors }}</div>
+      {% endif %}
+    </div>
+
+    <div class="form-group">
+      <label for="{{ form.password2.id_for_label }}">Password confirmation:</label>
+      {{ form.password2 }}
+      {% if form.password2.errors %}
+        <div class="error">{{ form.password2.errors }}</div>
+      {% endif %}
+    </div>
+
+    <button class="btn" type="submit">Registrar</button>
+  </form>
+
+  <p>Já tem conta? <a href="{% url 'login' %}">Entrar</a>.</p>
+</div>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  // Seleciona o campo de senha dinamicamente
+  const passwordInput = document.querySelector("input[type='password']");
+  const lengthReq = document.getElementById("length");
+  const uppercaseReq = document.getElementById("uppercase");
+  const numberReq = document.getElementById("number");
+  const specialReq = document.getElementById("special");
+
+  if (!passwordInput) {
+    console.error("Campo de senha não encontrado!");
+    return;
+  }
+
+  passwordInput.addEventListener("input", () => {
+    const value = passwordInput.value;
+
+    lengthReq.className = value.length >= 8 ? "valid" : "invalid";
+    uppercaseReq.className = /[A-Z]/.test(value) ? "valid" : "invalid";
+    numberReq.className = /\d/.test(value) ? "valid" : "invalid";
+    specialReq.className = /[!@#$%^&*]/.test(value) ? "valid" : "invalid";
+  });
+});
+</script>
+
+
+{% endblock %}
+
+
+

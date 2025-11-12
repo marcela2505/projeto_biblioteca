@@ -1,0 +1,56 @@
+{% extends "biblioteca/base.html" %}
+{% block content %}
+  <h1>Lista de Livros</h1>
+  <style>
+    table.livros-table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: white;
+      border: 2px solid #2c3e50; 
+      border-radius: 8px;         
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.288); 
+      overflow: hidden;   
+    }
+
+    body{
+      background-color: #cccccc33;
+    }
+
+   
+     
+  </style>
+  
+  {% if livros %}
+    <form method="get" action="" style="display:flex; gap:10px; align-items:center; max-width:700px; margin: 25px; ">
+    <input
+      type="text"
+      name="q"
+      placeholder="Pesquisar por título ou autor..."
+      value="{{ query|default:'' }}"
+      style="flex:1; min-width:0; padding:9px 10px; border:1px solid #ccc; border-radius:6px; box-sizing:border-box;">
+    <button
+      type="submit"
+      style="padding: 10px 14px; border-radius:6px; border:none; background:#2c3e50; color:#fff; cursor:pointer;">
+      Buscar
+    </button>
+    </form>
+    <table class="livros-table">
+      <thead>
+        <tr><th>Título</th><th>Autor</th><th>Ano</th><th>Gênero</th><th>Disponível</th></tr>
+      </thead>
+      <tbody>
+        {% for livro in livros %}
+          <tr>
+            <td>{{ livro.titulo }}</td>
+            <td>{{ livro.autor }}</td>
+            <td>{{ livro.ano_publicacao|default:"—" }}</td>
+            <td>{{ livro.genero|default:"—" }}</td>
+            <td>{{ livro.disponivel|yesno:"Sim,Não" }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p>Não há livros cadastrados ainda. <a href="{% url 'adicionar_livro' %}">Adicione o primeiro livro</a>.</p>
+  {% endif %}
+{% endblock %}

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lista de Livros</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+{% if messages %}
+  <ul class=\"messages\">
+    {% for message in messages %}
+      <li class=\"{{ message.tags }}\">{{ message }}</li>
+    {% endfor %}
+  </ul>
+{% endif %}
+
+    <header>
+        <h1>Livros Cadastrados</h1>
+    </header>
+    <div class="container">
+        <a href="{% url 'novo_livro' %}">Adicionar Novo Livro</a>
+        <ul>
+            {% for livro in livros %}
+                <li>{{ livro.titulo }} - {{ livro.autor }} ({{ livro.publicado_em }})</li>
+            {% empty %}
+                <li>Nenhum livro cadastrado.</li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>

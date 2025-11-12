@@ -1,0 +1,172 @@
+{% extends "biblioteca/base.html" %}
+
+{% block content %}
+<!-- Adiciona os ícones Lucide (versão CDN, funciona direto no Django) -->
+<script src="https://unpkg.com/lucide@latest"></script>
+
+<style>
+  body {
+    font-family: "Poppins", sans-serif;
+    background: linear-gradient(to bottom, #f7f9fb, #ffffff);
+    color: #2c3e50;
+  }
+
+  .home-container {
+    max-width: 1000px;
+    margin: 50px auto;
+    text-align: center;
+  }
+
+  h1 {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+
+  .subtitle {
+    color: #5f6f7e;
+    margin-bottom: 30px;
+    font-style: italic;
+  }
+
+  .banner {
+    background: url('https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=1600&q=80') center/cover;
+    height: 200px;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    margin-bottom: -50px;
+  }
+
+  .stats-card {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    padding: 25px;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 2;
+    width: 90%;
+    margin: 0 auto 40px auto;
+  }
+
+  .stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 180px;
+    margin: 10px;
+  }
+
+  .stat-icon {
+    width: 28px;
+    height: 28px;
+    color: #2c3e50;
+    margin-bottom: 8px;
+  }
+
+  .stat-number {
+    font-weight: 600;
+    font-size: 1.5rem;
+    color: #2980b9;
+  }
+
+  .stat-label {
+    font-size: 0.9rem;
+    color: #5f6f7e;
+  }
+
+  h2 {
+    text-align: left;
+    font-size: 1.3rem;
+    margin: 30px 0 20px 5%;
+  }
+
+  .books-grid {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 50px;
+  }
+
+  .book-card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+    width: 200px;
+    padding: 15px;
+    text-align: left;
+    transition: transform 0.2s;
+  }
+
+  .book-card:hover {
+    transform: translateY(-4px);
+  }
+
+  .book-card img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 10px;
+  }
+
+  .book-title {
+    font-weight: 600;
+    color: #2c3e50;
+  }
+
+  .book-author {
+    font-size: 0.9rem;
+    color: #7f8c8d;
+  }
+</style>
+
+<div class="home-container">
+  <h1>Bem-vindo(a) à Biblioteca Virtual</h1>
+  <p class="subtitle">“O lugar onde cada livro abre um novo mundo.”</p>
+
+  <div class="banner"></div>
+
+  <div class="stats-card">
+    <div class="stat">
+      <i data-lucide="book-open" class="stat-icon"></i>
+      <div class="stat-number">{{ total_livros }}</div>
+      <div class="stat-label">Livros disponíveis</div>
+    </div>
+    <div class="stat">
+      <i data-lucide="bookmark" class="stat-icon"></i>
+      <div class="stat-number">{{ total_emprestimos }}</div>
+      <div class="stat-label">Livros emprestados</div>
+    </div>
+    <div class="stat">
+      <i data-lucide="users" class="stat-icon"></i>
+      <div class="stat-number">{{ total_usuarios }}</div>
+      <div class="stat-label">Usuários cadastrados</div>
+    </div>
+    <div class="stat">
+      <i data-lucide="calendar" class="stat-icon"></i>
+      <div class="stat-number">{{ livros_mes }}</div>
+      <div class="stat-label">Livros adicionados este mês</div>
+    </div>
+  </div>
+
+  <h2>Livros em destaque</h2>
+  <div class="books-grid">
+    {% for livro in livros_destaque %}
+      <div class="book-card">
+        <div class="book-title">{{ livro.titulo }}</div>
+        <div class="book-author">{{ livro.autor }}</div>
+      </div>
+    {% empty %}
+      <p>Nenhum livro em destaque no momento.</p>
+    {% endfor %}
+  </div>
+</div>
+
+<script>
+  lucide.createIcons();
+</script>
+{% endblock %}
