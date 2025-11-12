@@ -37,7 +37,7 @@ git clone https://github.com/seu-usuario/nome-do-repositorio.git
 cd nome-do-repositorio
 ```
 
-###2. Crie e ative o ambiente virtual
+### 2. Crie e ative o ambiente virtual
 ```bash
 python -m venv venv
 venv\Scripts\activate  # (Windows)
@@ -45,23 +45,23 @@ venv\Scripts\activate  # (Windows)
 source venv/bin/activate  # (Linux/Mac)
 ```
 
-###3. Instale as dependências
+### 3. Instale as dependências
 ```bash
 pip install -r requirements.txt
 ```
 
-###4. Aplique as migrações
+### 4. Aplique as migrações
 ```bash
 python manage.py makemigrations
 python manage.py migrate
 ```
 
-###5. Crie um superusuário (para acessar o admin)
+### 5. Crie um superusuário (para acessar o admin)
 ```bash
 python manage.py createsuperuser
 ```
 
-###6. Execute o servidor
+### 6. Execute o servidor
 ```bash
 python manage.py runserver
 ```
@@ -70,17 +70,17 @@ Depois acesse:
 
 ---
 
-##🧾 Observações
+## 🧾 Observações
 - Para cadastrar livros e gerenciar empréstimos, é necessário estar logado.
 - Apenas usuários administradores podem adicionar novos livros.
 - As estatísticas da página inicial são atualizadas automaticamente conforme o uso.
 
 ---
 
-##📷 Exemplo da Página Inicial
+## 📷 Exemplo da Página Inicial
 <img width="1353" height="636" alt="image" src="https://github.com/user-attachments/assets/591ea46f-b219-4978-a4b7-5a6f8220ed3f" />
 
 ---
 
-##📄 Licença
+## 📄 Licença
 Este projeto está sob a licença MIT — sinta-se livre para usar e modificar.
